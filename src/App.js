@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import AddToDo from "./components/AddToDo";
 
-function App() {
+export default function App() {
+
+
+  function shoowadd(){
+
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h2>ToDo List</h2>
+      <div className="btnTodo">
+        <button onClick={shoowadd}>ADD ToDo</button>
+        <button>ToDo Done</button>
+        <button> Deleted </button>
+      </div>
+      <div>
+      { <AddToDo  />}
+    </div>
     </div>
   );
 }
 
-export default App;
+// &#9940;
