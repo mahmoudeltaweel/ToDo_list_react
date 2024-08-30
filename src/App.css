@@ -42,11 +42,7 @@
   width: 180px;
   overflow-wrap:break-word;
   list-style-type: disclosure-closed;
-  cursor: pointer;
 
-}
-.done{
-  text-decoration: line-through;
 }
 
 .content input{
@@ -72,6 +68,13 @@
   align-items: center;
 
 }
+span{
+  margin-left: 10px;
+}
 .icondelete{
+  cursor: pointer;
+}
+.icondone{
+  font-size: 20px;
   cursor: pointer;
 }
