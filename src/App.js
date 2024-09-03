@@ -1,57 +1,57 @@
-import { useRef, useState } from "react";
+import {  useContext, useState } from "react";
 import "./App.css";
+import AddToDo from "./components/AddToDo";
+import ToDoDone from "./components/ToDoDone";
+import ToDoDeleted from "./components/ToDoDeleted";
+import { addtodolocal } from "./DataLocalContext";
 
 export default function App() {
-  const [todos, settodos] = useState([]);
-  const inputRef = useRef();
+  
+  const startdata = useContext(addtodolocal);
 
-  function handelAddtodo() {
-    const text = inputRef.current.value;
-    const newitem = { completed: false, text };
-    settodos([...todos, newitem]);
-    inputRef.current.value = "";
-  }
-  function handelTODO(index) {
-    const newtodo = [...todos];
-    newtodo[index].completed = !newtodo[index].completed;
-    settodos(newtodo);
-  }
+  // console.log(startdata);
+  
 
-  function handeldelteitem(index) {
-    const delteitem = [...todos];
-    delteitem.splice(index, 1);
-    settodos(delteitem);
+  const[addtodo,setAddToDo]=useState(true);
+  const[donetodo,setDoneToDo]=useState(false);
+  const[deletetodo,setdeleteToDo]=useState(false);
+
+
+
+
+  function showToDO(e){
+    console.log(e.target.innerText);
+    if(e.target.innerText==="ADD ToDo"){
+      setAddToDo(true)
+      setDoneToDo(false)
+      setdeleteToDo(false)
+    }else if(e.target.innerText==="ToDo Done"){
+      setAddToDo(false)
+      setDoneToDo(true)
+      setdeleteToDo(false)
+    }else if(e.target.innerText==="ToDo Deleted"){
+      setAddToDo(false)
+      setDoneToDo(false)
+      setdeleteToDo(true)
+    }
   }
+ 
 
   return (
     <div className="App">
       <h2>ToDo List</h2>
       <div className="btnTodo">
-        <button>ADD ToDo</button>
-        <button>ToDo Done</button>
-        <button> Deleted </button>
+        <button onClick={(e)=>showToDO(e)}>ADD ToDo</button>
+        <button onClick={(e)=>showToDO(e)} >ToDo Done</button>
+        <button onClick={(e)=>showToDO(e)}>ToDo Deleted</button>
       </div>
       <div>
-      <div className="content">
-        <ul>
-          {todos.map(({ text, completed }, index) => (
-            <div key={index} className="item">
-              <li
-                className={completed ? "done" : ""}
-                onClick={() => handelTODO(index)}
-              >
-                {text}
-              </li>
-              <span className="icondelete" onClick={() => handeldelteitem(index)}>&#10060;</span>
-            </div>
-          ))}
-        </ul>
-
-        <input required ref={inputRef} placeholder="Enter your todo...." />
-        {/* {Err && <p style={{color:"red"}}> please Enter your ToDo </p> } */}
-        <button onClick={handelAddtodo}>Add</button>
-      </div>
+      { addtodo && <AddToDo  startdata={startdata}  />}
+      { donetodo && <ToDoDone  />}
+      { deletetodo && <ToDoDeleted  />}
     </div>
     </div>
   );
 }
+
+// &#9940;
